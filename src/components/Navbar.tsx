@@ -24,6 +24,9 @@ export default function Navbar() {
               <Link href="/#about" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 About
               </Link>
+              <Link href="/#experience" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+                Experience
+              </Link>
               <Link href="/#skills" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 Skills
               </Link>
@@ -64,6 +67,9 @@ export default function Navbar() {
             </Link>
             <Link href="/#about" className="text-gray-900 hover:text-blue-600 block px-3 py-2 text-base font-medium">
               About
+            </Link>
+            <Link href="/#experience" className="text-gray-900 hover:text-blue-600 block px-3 py-2 text-base font-medium">
+              Experience
             </Link>
             <Link href="/#skills" className="text-gray-900 hover:text-blue-600 block px-3 py-2 text-base font-medium">
               Skills
