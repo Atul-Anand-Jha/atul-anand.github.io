@@ -26,35 +26,34 @@ export default function Contact() {
     setSubmitStatus('idle')
 
     try {
-      // Using a simple form submission approach that works well with static sites
-      // This creates a smooth UX without external dependencies
-      
-      // Simulate form processing for better UX
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // In a real scenario, you could integrate with services like:
-      // - Netlify Forms (if hosted on Netlify)
-      // - Vercel Edge Functions (if hosted on Vercel)
-      // - GitHub Actions (for GitHub Pages)
-      
-      // For now, we'll provide a smooth experience and guide users to alternative contact methods
-      console.log('Contact form submission:', {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject || 'Portfolio Contact Form',
-        message: formData.message,
-        timestamp: new Date().toISOString()
+      // Using Formspree for real email delivery  
+      // This uses a demo form - replace with your own form ID from formspree.io
+      const response = await fetch('https://formspree.io/f/mwpkgqjq', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'Portfolio Contact Form',
+          message: formData.message,
+        }),
       })
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      })
-      
-      setSubmitStatus('success')
+
+      if (response.ok) {
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        })
+        setSubmitStatus('success')
+      } else {
+        throw new Error('Failed to send message')
+      }
     } catch (error) {
       console.error('Error processing form:', error)
       setSubmitStatus('error')
