@@ -4,34 +4,31 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function Hero() {
-  const [suffixText, setSuffixText] = useState('')
-  const [currentSuffix, setCurrentSuffix] = useState('{ Jha }')
+  const [displayedName, setDisplayedName] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [showCursor, setShowCursor] = useState(true)
   
+  const fullName = "Atul Anand"
+  
   useEffect(() => {
     let timeoutId: NodeJS.Timeout
 
-    if (isTyping && currentIndex < currentSuffix.length) {
-      // Typing the current suffix
+    if (isTyping && currentIndex < fullName.length) {
+      // Typing each character
       timeoutId = setTimeout(() => {
-        setSuffixText(currentSuffix.slice(0, currentIndex + 1))
+        setDisplayedName(fullName.slice(0, currentIndex + 1))
         setCurrentIndex(prev => prev + 1)
-      }, 120)
-    } else if (isTyping && currentIndex >= currentSuffix.length) {
-      // Finished typing current suffix, wait 5 seconds then start erasing
-      setIsTyping(false)
+      }, 150) // Slower typing for better effect
+    } else if (isTyping && currentIndex >= fullName.length) {
+      // Finished typing, wait then restart
       setShowCursor(false)
       timeoutId = setTimeout(() => {
-        // Start erasing
         setCurrentIndex(0)
-        setSuffixText('')
-        // Toggle between { Jha } and </ Jha >
-        setCurrentSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
+        setDisplayedName('')
         setIsTyping(true)
         setShowCursor(true)
-      }, 5000)
+      }, 3000) // Wait 3 seconds before restarting
     }
 
     return () => {
@@ -39,20 +36,14 @@ export default function Hero() {
         clearTimeout(timeoutId)
       }
     }
-  }, [currentIndex, isTyping, currentSuffix])
+  }, [currentIndex, isTyping, fullName])
 
   const renderName = () => {
     return (
       <span className="relative inline-block">
-        Atul Anand{' '}
-        <span className="relative inline-block">
-          <span className="text-blue-600 font-black bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Jha
-          </span>
-          <span className="absolute -top-8 -right-2 text-lg text-purple-500 font-mono whitespace-nowrap font-bold">
-            {suffixText}
-            {showCursor && <span className="animate-pulse text-purple-500">|</span>}
-          </span>
+        <span className="text-green-400 font-mono font-bold">
+          {displayedName}
+          {showCursor && <span className="animate-pulse text-green-400">|</span>}
         </span>
       </span>
     )
@@ -95,7 +86,7 @@ export default function Hero() {
               <div className="w-[19rem] h-[19rem] sm:w-[22rem] sm:h-[22rem] lg:w-[26rem] lg:h-[26rem] rounded-full overflow-hidden relative">
                 <Image
                   src="/portfolio/profile-picture.png"
-                  alt="Atul Anand Jha - ML Platform Engineer"
+                  alt="Atul Anand - ML Platform Engineer"
                   width={416}
                   height={416}
                   className="w-full h-full object-cover"
