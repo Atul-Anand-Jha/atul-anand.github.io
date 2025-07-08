@@ -25,15 +25,15 @@ export default function Hero() {
       setIsComplete(true)
       setShowCursor(false)
       
-      // Reset after 5 seconds
+      // Reset after 3 seconds and toggle suffix
       timeoutId = setTimeout(() => {
         setCurrentIndex(0)
         setDisplayText('')
         setIsComplete(false)
         setShowCursor(true)
-        // Toggle Jha suffix style
+        // Toggle Jha suffix style for next cycle
         setJhaSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
-      }, 5000)
+      }, 3000)
     }
 
     return () => {
@@ -57,8 +57,8 @@ export default function Hero() {
       if (parts.length >= 3) {
         return (
           <span className="relative inline-block">
-            {parts[0]} {parts[1]} 
-            <span className="relative inline-block ml-2">
+            {parts[0]} {parts[1]}{' '}
+            <span className="relative inline-block">
               <span className="text-blue-600 font-black bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                 {parts[2]}
               </span>
