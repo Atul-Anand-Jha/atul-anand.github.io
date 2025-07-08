@@ -20,7 +20,7 @@ export default function Contact() {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <i className="fas fa-envelope text-blue-600 w-6"></i>
-                  <span className="ml-3 text-gray-600">alex.chen@mlplatform.dev</span>
+                  <span className="ml-3 text-gray-600">atul.anand.jha@mlplatform.dev</span>
                 </div>
                 <div className="flex items-center">
                   <i className="fas fa-phone text-blue-600 w-6"></i>
@@ -113,7 +113,7 @@ export default function Contact() {
       <footer className="mt-20 border-t border-gray-200 pt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-gray-600">
-            &copy; 2025 Alex Chen - ML Platform Engineer. All rights reserved.
+            &copy; 2025 Atul Anand Jha - ML Platform Engineer. All rights reserved.
           </p>
         </div>
       </footer>
