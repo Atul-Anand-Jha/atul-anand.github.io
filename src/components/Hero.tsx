@@ -91,13 +91,13 @@ export default function Hero() {
           </div>
           
           <div className="order-1 lg:order-2 flex justify-center">
-            <div className="w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
-              <div className="w-60 h-60 sm:w-72 sm:h-72 rounded-full overflow-hidden relative">
+            <div className="w-80 h-80 sm:w-96 sm:h-96 lg:w-[28rem] lg:h-[28rem] bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
+              <div className="w-[19rem] h-[19rem] sm:w-[22rem] sm:h-[22rem] lg:w-[26rem] lg:h-[26rem] rounded-full overflow-hidden relative">
                 <Image
                   src="/portfolio/profile-picture.png"
                   alt="Atul Anand Jha - ML Platform Engineer"
-                  width={288}
-                  height={288}
+                  width={416}
+                  height={416}
                   className="w-full h-full object-cover"
                   priority
                 />
