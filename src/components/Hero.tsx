@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Hero() {
   const [suffixText, setSuffixText] = useState('')
@@ -91,68 +92,16 @@ export default function Hero() {
           
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
-              <svg 
-                width="240" 
-                height="240" 
-                viewBox="0 0 240 240" 
-                className="w-60 h-60 sm:w-72 sm:h-72"
-              >
-                {/* Developer/Engineer Avatar */}
-                <defs>
-                  <linearGradient id="skinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#fdd5ae" />
-                    <stop offset="100%" stopColor="#f4c2a1" />
-                  </linearGradient>
-                  <linearGradient id="hairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#2d1810" />
-                    <stop offset="100%" stopColor="#1a0f0a" />
-                  </linearGradient>
-                  <linearGradient id="shirtGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="100%" stopColor="#1d4ed8" />
-                  </linearGradient>
-                </defs>
-                
-                {/* Face */}
-                <circle cx="120" cy="100" r="45" fill="url(#skinGradient)" />
-                
-                {/* Hair */}
-                <path d="M 75 80 Q 120 40 165 80 Q 160 60 140 55 Q 120 50 100 55 Q 80 60 75 80" fill="url(#hairGradient)" />
-                
-                {/* Eyes */}
-                <circle cx="105" cy="95" r="3" fill="#2d1810" />
-                <circle cx="135" cy="95" r="3" fill="#2d1810" />
-                <circle cx="106" cy="94" r="1" fill="white" />
-                <circle cx="136" cy="94" r="1" fill="white" />
-                
-                {/* Eyebrows */}
-                <path d="M 100 88 Q 108 85 115 88" stroke="#2d1810" strokeWidth="2" fill="none" />
-                <path d="M 125 88 Q 132 85 140 88" stroke="#2d1810" strokeWidth="2" fill="none" />
-                
-                {/* Nose */}
-                <path d="M 118 105 Q 120 108 122 105" stroke="#e5b299" strokeWidth="1" fill="none" />
-                
-                {/* Smile */}
-                <path d="M 110 115 Q 120 125 130 115" stroke="#d1948a" strokeWidth="2" fill="none" />
-                
-                {/* Neck */}
-                <rect x="110" y="140" width="20" height="15" fill="url(#skinGradient)" />
-                
-                {/* Shirt */}
-                <path d="M 90 155 Q 120 150 150 155 L 155 200 Q 120 205 85 200 Z" fill="url(#shirtGradient)" />
-                
-                {/* Code symbols floating around */}
-                <text x="60" y="170" font-family="monospace" font-size="12" fill="#6b7280" opacity="0.6">{'<ML/>'}</text>
-                <text x="170" y="130" font-family="monospace" font-size="10" fill="#6b7280" opacity="0.6">{'{}='}</text>
-                <text x="180" y="180" font-family="monospace" font-size="8" fill="#6b7280" opacity="0.6">{'()=>'}</text>
-                <text x="40" y="120" font-family="monospace" font-size="14" fill="#6b7280" opacity="0.6">{'AI'}</text>
-                
-                {/* Laptop suggestion */}
-                <rect x="95" y="185" width="50" height="30" rx="3" fill="#374151" opacity="0.8" />
-                <rect x="98" y="188" width="44" height="24" rx="1" fill="#1f2937" />
-                <rect x="116" y="215" width="8" height="3" fill="#374151" />
-                <rect x="110" y="218" width="20" height="2" rx="1" fill="#374151" />
-              </svg>
+              <div className="w-60 h-60 sm:w-72 sm:h-72 rounded-full overflow-hidden relative">
+                <Image
+                  src="/profile-picture.png"
+                  alt="Atul Anand Jha - ML Platform Engineer"
+                  width={288}
+                  height={288}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
