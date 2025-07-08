@@ -94,7 +94,7 @@ export default function Hero() {
             <div className="w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
               <div className="w-60 h-60 sm:w-72 sm:h-72 rounded-full overflow-hidden relative">
                 <Image
-                  src="/profile-picture.png"
+                  src="/portfolio/profile-picture.png"
                   alt="Atul Anand Jha - ML Platform Engineer"
                   width={288}
                   height={288}
