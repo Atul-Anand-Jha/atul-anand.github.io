@@ -41,9 +41,9 @@ export default function Hero() {
   const renderName = () => {
     return (
       <span className="relative inline-block">
-        <span className="text-green-400 font-mono font-bold">
+        <span className="text-green-800 font-mono font-bold">
           {displayedName}
-          {showCursor && <span className="animate-pulse text-green-400">|</span>}
+          {showCursor && <span className="animate-pulse text-green-800">|</span>}
         </span>
       </span>
     )
