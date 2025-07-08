@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  basePath: '/portfolio',
+  basePath: '/portfolio', // Repository name-based basePath
   assetPrefix: '/portfolio',
   images: {
     unoptimized: true
