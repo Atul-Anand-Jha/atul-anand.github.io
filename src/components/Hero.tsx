@@ -7,38 +7,48 @@ export default function Hero() {
   const [isComplete, setIsComplete] = useState(false)
   const [jhaSuffix, setJhaSuffix] = useState('{ Jha }')
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [showCursor, setShowCursor] = useState(true)
   
   const fullName = "Atul Anand Jha"
   
   useEffect(() => {
-    const typeWriter = () => {
-      if (currentIndex < fullName.length) {
+    let timeoutId: NodeJS.Timeout
+
+    if (currentIndex < fullName.length) {
+      // Typing phase
+      timeoutId = setTimeout(() => {
         setDisplayText(fullName.slice(0, currentIndex + 1))
         setCurrentIndex(prev => prev + 1)
-      } else {
-        setIsComplete(true)
-        // Reset after 5 seconds
-        setTimeout(() => {
-          setCurrentIndex(0)
-          setDisplayText('')
-          setIsComplete(false)
-          // Toggle Jha suffix style
-          setJhaSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
-        }, 5000)
-      }
+      }, 150)
+    } else if (!isComplete) {
+      // Just finished typing
+      setIsComplete(true)
+      setShowCursor(false)
+      
+      // Reset after 5 seconds
+      timeoutId = setTimeout(() => {
+        setCurrentIndex(0)
+        setDisplayText('')
+        setIsComplete(false)
+        setShowCursor(true)
+        // Toggle Jha suffix style
+        setJhaSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
+      }, 5000)
     }
 
-    const interval = setInterval(typeWriter, 150) // 150ms per character
-    
-    return () => clearInterval(interval)
-  }, [currentIndex, fullName.length])
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+    }
+  }, [currentIndex, isComplete, fullName.length])
 
   const renderName = () => {
     if (!isComplete) {
       return (
         <>
           {displayText}
-          <span className="animate-pulse">|</span>
+          {showCursor && <span className="animate-pulse text-blue-600">|</span>}
         </>
       )
     } else {
@@ -46,17 +56,17 @@ export default function Hero() {
       const parts = displayText.split(' ')
       if (parts.length >= 3) {
         return (
-          <>
+          <span className="relative inline-block">
             {parts[0]} {parts[1]} 
-            <span className="relative">
-              <span className="text-blue-600 font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            <span className="relative inline-block ml-2">
+              <span className="text-blue-600 font-black bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                 {parts[2]}
               </span>
-              <span className="absolute -top-2 -right-16 text-xs text-purple-500 font-mono">
+              <span className="absolute -top-6 -right-2 text-sm text-purple-500 font-mono whitespace-nowrap">
                 {jhaSuffix}
               </span>
             </span>
-          </>
+          </span>
         )
       }
       return displayText
