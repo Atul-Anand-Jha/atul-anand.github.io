@@ -17,18 +17,19 @@ export default function Hero() {
       timeoutId = setTimeout(() => {
         setSuffixText(currentSuffix.slice(0, currentIndex + 1))
         setCurrentIndex(prev => prev + 1)
-      }, 150)
+      }, 120)
     } else if (isTyping && currentIndex >= currentSuffix.length) {
       // Finished typing current suffix, wait 5 seconds then start erasing
       setIsTyping(false)
       setShowCursor(false)
       timeoutId = setTimeout(() => {
-        setIsTyping(true)
-        setShowCursor(true)
+        // Start erasing
         setCurrentIndex(0)
         setSuffixText('')
         // Toggle between { Jha } and </ Jha >
         setCurrentSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
+        setIsTyping(true)
+        setShowCursor(true)
       }, 5000)
     }
 
@@ -47,7 +48,7 @@ export default function Hero() {
           <span className="text-blue-600 font-black bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             Jha
           </span>
-          <span className="absolute -top-6 -right-2 text-sm text-purple-500 font-mono whitespace-nowrap">
+          <span className="absolute -top-8 -right-2 text-lg text-purple-500 font-mono whitespace-nowrap font-bold">
             {suffixText}
             {showCursor && <span className="animate-pulse text-purple-500">|</span>}
           </span>

@@ -1,4 +1,61 @@
+'use client'
+
+import { useState } from 'react'
+
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      // Since this is a static site, we'll create the mailto link directly
+      const subject = encodeURIComponent(formData.subject || 'Portfolio Contact Form')
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}`
+      )
+      
+      const mailtoLink = `mailto:atulanand.jha@gmail.com?subject=${subject}&body=${body}`
+      
+      // Open default email client
+      window.location.href = mailtoLink
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      })
+      
+      setSubmitStatus('success')
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   return (
     <section id="contact" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,7 +134,24 @@ export default function Contact() {
             
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h3 className="text-xl font-semibold text-gray-900 mb-6">Send a Message</h3>
-              <form className="space-y-4">
+              
+              {submitStatus === 'success' && (
+                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-green-800 text-sm">
+                    Email client opened! Please send the email from your default email application.
+                  </p>
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 text-sm">
+                    There was an error. Please try again or email me directly at atulanand.jha@gmail.com
+                  </p>
+                </div>
+              )}
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Name
@@ -85,6 +159,10 @@ export default function Contact() {
                   <input 
                     type="text" 
                     id="name" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Your Name"
                   />
@@ -96,6 +174,10 @@ export default function Contact() {
                   <input 
                     type="email" 
                     id="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="your.email@example.com"
                   />
@@ -107,6 +189,9 @@ export default function Contact() {
                   <input 
                     type="text" 
                     id="subject" 
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Project Discussion"
                   />
@@ -117,6 +202,10 @@ export default function Contact() {
                   </label>
                   <textarea 
                     id="message" 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
                     rows={4}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Tell me about your project or opportunity..."
@@ -124,9 +213,10 @@ export default function Contact() {
                 </div>
                 <button 
                   type="submit" 
-                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? 'Opening Email...' : 'Send Message'}
                 </button>
               </form>
             </div>
