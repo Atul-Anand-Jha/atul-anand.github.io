@@ -208,15 +208,111 @@ If you want a custom domain like `yourname.com`:
 3. **Images Not Loading**: Make sure `images.unoptimized: true` is in next.config.ts
 4. **CSS Issues**: Check that Tailwind CSS is properly configured
 
-### Debug Commands:
-```bash
-# Test build locally
-npm run build
-npx serve out
+### Authentication Issues (403 Permission Denied)
 
-# Check GitHub Actions logs
-# Go to repository → Actions tab → View latest workflow run
+If you get this error:
 ```
+remote: Permission to Atul-Anand-Jha/atul-anand.github.io.git denied to atul-anand7.
+fatal: unable to access 'https://github.com/Atul-Anand-Jha/atul-anand.github.io.git/': The requested URL returned error: 403
+```
+
+**Solution Options:**
+
+#### Option 1: Use Personal Access Token (Recommended)
+1. **Generate a Personal Access Token**:
+   - Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
+   - Click "Generate new token (classic)"
+   - Set expiration (recommend 90 days or no expiration for personal projects)
+   - Select scopes: `repo` (full control of private repositories)
+   - Copy the token (save it somewhere safe!)
+
+2. **Update Git Remote URL**:
+   ```bash
+   # Remove existing remote
+   git remote remove origin
+   
+   # Add remote with token authentication
+   git remote add origin https://YOUR_TOKEN@github.com/Atul-Anand-Jha/atul-anand.github.io.git
+   
+   # Push to GitHub
+   git push -u origin main
+   ```
+
+#### Option 2: Use SSH Authentication
+1. **Generate SSH Key** (if you don't have one):
+   ```bash
+   ssh-keygen -t ed25519 -C "your.email@example.com"
+   # Press Enter for default location
+   # Optionally set a passphrase
+   ```
+
+2. **Add SSH Key to GitHub**:
+   ```bash
+   # Copy your public key
+   cat ~/.ssh/id_ed25519.pub
+   ```
+   - Go to GitHub → Settings → SSH and GPG keys → New SSH key
+   - Paste the public key and save
+
+3. **Update Git Remote to SSH**:
+   ```bash
+   # Remove existing remote
+   git remote remove origin
+   
+   # Add SSH remote
+   git remote add origin git@github.com:Atul-Anand-Jha/atul-anand.github.io.git
+   
+   # Push to GitHub
+   git push -u origin main
+   ```
+
+#### Option 3: Fix GitHub Username Mismatch
+If your local Git username doesn't match your GitHub username:
+
+```bash
+# Check current Git config
+git config user.name
+git config user.email
+
+# Update to match your GitHub account
+git config user.name "Atul-Anand-Jha"
+git config user.email "your.github.email@example.com"
+
+# For global config (affects all repositories)
+git config --global user.name "Atul-Anand-Jha"
+git config --global user.email "your.github.email@example.com"
+```
+
+#### Option 4: Use GitHub CLI (Easiest)
+1. **Install GitHub CLI**:
+   ```bash
+   # macOS
+   brew install gh
+   
+   # Or download from: https://cli.github.com/
+   ```
+
+2. **Authenticate and Push**:
+   ```bash
+   # Login to GitHub
+   gh auth login
+   # Follow the prompts to authenticate
+   
+   # Push your code
+   git push -u origin main
+   ```
+
+### Quick Fix for Immediate Push
+
+If you need to push right now, use this command with your GitHub username and a Personal Access Token:
+
+```bash
+# Replace YOUR_TOKEN with your actual token
+git remote set-url origin https://Atul-Anand-Jha:YOUR_TOKEN@github.com/Atul-Anand-Jha/atul-anand.github.io.git
+git push -u origin main
+```
+
+**Important**: Never commit your personal access token to the repository!
 
 ## Security Notes
 
