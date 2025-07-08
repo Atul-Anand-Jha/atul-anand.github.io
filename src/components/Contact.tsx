@@ -26,40 +26,19 @@ export default function Contact() {
     setSubmitStatus('idle')
 
     try {
-      // Using Web3Forms API for reliable email delivery
-      const submitData = new FormData()
-      submitData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY') // You'll need to get this from web3forms.com
-      submitData.append('name', formData.name)
-      submitData.append('email', formData.email)
-      submitData.append('subject', formData.subject || 'Portfolio Contact Form')
-      submitData.append('message', formData.message)
-      submitData.append('to', 'atulanand.jha@gmail.com')
-
-      // For demo purposes, let's simulate the submission
-      // In production, you would uncomment the fetch call below
+      // Option 1: Direct mailto link (most secure for static sites)
+      const subject = encodeURIComponent(formData.subject || 'Portfolio Contact Form')
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}`
+      )
       
-      /*
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: submitData
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to send message')
-      }
-      */
-
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const mailtoLink = `mailto:atulanand.jha@gmail.com?subject=${subject}&body=${body}`
       
-      // Log the form data for demo
-      console.log('Form submission:', {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject || 'Portfolio Contact Form',
-        message: formData.message,
-        to: 'atulanand.jha@gmail.com'
-      })
+      // Open user's email client
+      window.open(mailtoLink, '_blank')
       
       // Reset form
       setFormData({
@@ -159,7 +138,7 @@ export default function Contact() {
               {submitStatus === 'success' && (
                 <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
                   <p className="text-green-800 text-sm">
-                    Message sent successfully! I&apos;ll get back to you soon.
+                    Your email client should have opened with a pre-filled message. Please send it to complete your inquiry!
                   </p>
                 </div>
               )}
