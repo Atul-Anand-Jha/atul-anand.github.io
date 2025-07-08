@@ -34,18 +34,38 @@ export default function Contact() {
               
               <div className="mt-8">
                 <h4 className="text-lg font-medium text-gray-900 mb-4">Connect on Social</h4>
-                <div className="flex space-x-4">
-                  <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
-                    <i className="fab fa-linkedin text-2xl"></i>
+                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+                  <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-linkedin text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">LinkedIn</span>
                   </a>
-                  <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    <i className="fab fa-github text-2xl"></i>
+                  <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-github text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">GitHub</span>
                   </a>
-                  <a href="#" className="text-gray-600 hover:text-blue-400 transition-colors">
-                    <i className="fab fa-twitter text-2xl"></i>
+                  <a href="#" className="text-gray-600 hover:text-black transition-colors flex flex-col items-center group">
+                    <i className="fab fa-x-twitter text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">X.com</span>
                   </a>
-                  <a href="#" className="text-gray-600 hover:text-red-600 transition-colors">
-                    <i className="fab fa-youtube text-2xl"></i>
+                  <a href="#" className="text-gray-600 hover:text-green-600 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-upwork text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Upwork</span>
+                  </a>
+                  <a href="#" className="text-gray-600 hover:text-gray-800 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-medium text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Medium</span>
+                  </a>
+                  <a href="#" className="text-gray-600 hover:text-blue-500 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-kaggle text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Kaggle</span>
+                  </a>
+                  <a href="#" className="text-gray-600 hover:text-pink-500 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-instagram text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">Instagram</span>
+                  </a>
+                  <a href="#" className="text-gray-600 hover:text-red-600 transition-colors flex flex-col items-center group">
+                    <i className="fab fa-youtube text-2xl mb-1"></i>
+                    <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">YouTube</span>
                   </a>
                 </div>
               </div>
