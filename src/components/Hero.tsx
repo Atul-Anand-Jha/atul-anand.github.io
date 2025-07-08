@@ -3,37 +3,33 @@
 import { useState, useEffect } from 'react'
 
 export default function Hero() {
-  const [displayText, setDisplayText] = useState('')
-  const [isComplete, setIsComplete] = useState(false)
-  const [jhaSuffix, setJhaSuffix] = useState('{ Jha }')
+  const [suffixText, setSuffixText] = useState('')
+  const [currentSuffix, setCurrentSuffix] = useState('{ Jha }')
+  const [isTyping, setIsTyping] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [showCursor, setShowCursor] = useState(true)
-  
-  const fullName = "Atul Anand Jha"
   
   useEffect(() => {
     let timeoutId: NodeJS.Timeout
 
-    if (currentIndex < fullName.length) {
-      // Typing phase
+    if (isTyping && currentIndex < currentSuffix.length) {
+      // Typing the current suffix
       timeoutId = setTimeout(() => {
-        setDisplayText(fullName.slice(0, currentIndex + 1))
+        setSuffixText(currentSuffix.slice(0, currentIndex + 1))
         setCurrentIndex(prev => prev + 1)
       }, 150)
-    } else if (!isComplete) {
-      // Just finished typing
-      setIsComplete(true)
+    } else if (isTyping && currentIndex >= currentSuffix.length) {
+      // Finished typing current suffix, wait 5 seconds then start erasing
+      setIsTyping(false)
       setShowCursor(false)
-      
-      // Reset after 3 seconds and toggle suffix
       timeoutId = setTimeout(() => {
-        setCurrentIndex(0)
-        setDisplayText('')
-        setIsComplete(false)
+        setIsTyping(true)
         setShowCursor(true)
-        // Toggle Jha suffix style for next cycle
-        setJhaSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
-      }, 3000)
+        setCurrentIndex(0)
+        setSuffixText('')
+        // Toggle between { Jha } and </ Jha >
+        setCurrentSuffix(prev => prev === '{ Jha }' ? '</ Jha >' : '{ Jha }')
+      }, 5000)
     }
 
     return () => {
@@ -41,36 +37,23 @@ export default function Hero() {
         clearTimeout(timeoutId)
       }
     }
-  }, [currentIndex, isComplete, fullName.length])
+  }, [currentIndex, isTyping, currentSuffix])
 
   const renderName = () => {
-    if (!isComplete) {
-      return (
-        <>
-          {displayText}
-          {showCursor && <span className="animate-pulse text-blue-600">|</span>}
-        </>
-      )
-    } else {
-      // Split the name to style "Jha" differently
-      const parts = displayText.split(' ')
-      if (parts.length >= 3) {
-        return (
-          <span className="relative inline-block">
-            {parts[0]} {parts[1]}{' '}
-            <span className="relative inline-block">
-              <span className="text-blue-600 font-black bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                {parts[2]}
-              </span>
-              <span className="absolute -top-6 -right-2 text-sm text-purple-500 font-mono whitespace-nowrap">
-                {jhaSuffix}
-              </span>
-            </span>
+    return (
+      <span className="relative inline-block">
+        Atul Anand{' '}
+        <span className="relative inline-block">
+          <span className="text-blue-600 font-black bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            Jha
           </span>
-        )
-      }
-      return displayText
-    }
+          <span className="absolute -top-6 -right-2 text-sm text-purple-500 font-mono whitespace-nowrap">
+            {suffixText}
+            {showCursor && <span className="animate-pulse text-purple-500">|</span>}
+          </span>
+        </span>
+      </span>
+    )
   }
 
   return (
