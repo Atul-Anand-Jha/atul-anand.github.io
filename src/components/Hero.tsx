@@ -5,7 +5,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Hi, I'm <span className="text-blue-600">Alex Chen</span>
+              Hi, I&apos;m <span className="text-blue-600">Alex Chen</span>
             </h1>
             <p className="text-xl sm:text-2xl text-gray-600 mt-4 font-medium">
               Senior ML Platform Engineer & AI Systems Architect

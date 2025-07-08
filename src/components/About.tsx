@@ -9,12 +9,12 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="text-lg text-gray-600 leading-relaxed">
-              I'm a passionate ML Platform Engineer with 6 years of experience building enterprise-scale
+              I&apos;m a passionate ML Platform Engineer with 6 years of experience building enterprise-scale
               machine learning infrastructure. I specialize in designing end-to-end ML platforms that
               seamlessly integrate data pipelines, model training, deployment, and monitoring systems.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              From edge computing optimizations to cloud-native ML architectures, I've worked on every
+              From edge computing optimizations to cloud-native ML architectures, I&apos;ve worked on every
               stage of the ML lifecycle. I believe in building robust, secure, and scalable systems
               that enable data scientists to focus on innovation while ensuring models perform reliably in production.
             </p>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { bucketListData, BucketListItem } from '@/data/bucketListData'
+import { bucketListData } from '@/data/bucketListData'
 
 export default function BucketListContainer() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -54,7 +54,7 @@ export default function BucketListContainer() {
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 max-w-2xl mx-auto">
             <p className="text-blue-800 text-sm">
               <i className="fas fa-info-circle mr-2"></i>
-              This is Alex's personal bucket list. Progress reflects real achievements and is updated by Alex.
+              This is Alex&apos;s personal bucket list. Progress reflects real achievements and is updated by Alex.
             </p>
           </div>
           
@@ -114,7 +114,7 @@ export default function BucketListContainer() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-4">
-            {filteredItems.map((item, index) => (
+            {filteredItems.map((item) => (
               <div
                 key={item.id}
                 className={`bg-white rounded-lg shadow-sm border p-6 transition-all hover:shadow-md ${

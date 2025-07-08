@@ -9,8 +9,8 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-lg text-gray-600 leading-relaxed">
-              I'm always interested in discussing new opportunities, innovative ML projects,
-              or collaborating on cutting-edge technology solutions. Let's connect!
+              I&apos;m always interested in discussing new opportunities, innovative ML projects,
+              or collaborating on cutting-edge technology solutions. Let&apos;s connect!
             </p>
           </div>
           
